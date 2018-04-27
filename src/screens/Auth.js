@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback
+} from 'react-native';
+import { connect } from 'react-redux';
+import { loginAttempt } from '../store/actions';
 import { Input, TextMain, TextHeader, ButtonBG } from '../components/ui';
 import startMainTabs from './main-tabs/startMainTabs';
+import validateFormField from '../utils/validation';
 import backgroundImage from '../assets/background.jpg';
 
 class AuthScreen extends Component {
   state = {
+    authMode: 'signup',
     portraitMode: true, // whether device has a portrait screen orientation
     formFields: {
       email: {
@@ -41,6 +53,10 @@ class AuthScreen extends Component {
   }
 
   onLogin = () => {
+    this.props.loginAttempt({
+      email: this.state.formFields.email.value,
+      password: this.state.formFields.password.value
+    });
     startMainTabs();
   };
 
@@ -52,12 +68,25 @@ class AuthScreen extends Component {
     }
   };
 
+  switchAuthMode = () => {
+    this.setState({
+      authMode: this.state.authMode === 'signup' ? 'login' : 'signup'
+    });
+  };
+
   handleFieldChange = (fieldName, fieldValue) => {
-    console.log(fieldName, fieldValue);
+    const { validationRules } = this.state.formFields[fieldName];
+    const compareFieldName = this.state.formFields[fieldName].validationRules.equalTo;
+    const compareValue = compareFieldName && this.state.formFields[compareFieldName].value;
+
     this.setState(prevState => ({
       formFields: {
         ...prevState.formFields,
-        [fieldValue]: { ...prevState.formFields[fieldName], value: fieldValue }
+        [fieldName]: {
+          ...prevState.formFields[fieldName],
+          value: fieldValue,
+          valid: validateFormField(fieldValue, validationRules, compareValue)
+        }
       }
     }));
   };
@@ -66,59 +95,85 @@ class AuthScreen extends Component {
     const { portraitMode } = this.state;
     return (
       <ImageBackground style={styles.backgroundImage} source={backgroundImage}>
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
           
           {portraitMode && (
             <TextMain>
-              <TextHeader>Please Log In</TextHeader>
+              <TextHeader>
+                Please {this.state.authMode === 'login' ? 'Log In' : 'Sign Up'}
+              </TextHeader>
             </TextMain>
           )}
 
           <ButtonBG
             background="#29aaf4"
             textColor="#fff"
-            onPress={() => console.log('Touched!')}
+            onPress={this.switchAuthMode}
           >
-            Switch to Log In
+            Switch to {this.state.authMode === 'login' ? 'Sign Up' : 'Log In'}
           </ButtonBG>
-          <View style={styles.inputContainer}>
-            <Input
-              style={styles.input}
-              value={this.state.formFields.email.value}
-              onTextChange={value => this.handleFieldChange('email', value)}
-              placeholder="Email Address"
-            />
 
-            <View
-              style={
-                portraitMode
-                  ? styles.pwdContainer_portrait
-                  : styles.pwdContainer_landscape
-              }
-            >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inputContainer}>
+              <Input
+                style={styles.input}
+                value={this.state.formFields.email.value}
+                onChangeText={value => this.handleFieldChange('email', value)}
+                placeholder="Email Address"
+                valid={this.state.formFields.email.valid}
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+              />
+
               <View
                 style={
-                  portraitMode
-                    ? styles.pwdWrapper_portrait
-                    : styles.pwdWrapper_landscape
-                  }
-              >
-                <Input style={styles.input} placeholder="Password" />
-              </View>
-              <View
-                style={
-                  portraitMode
-                    ? styles.pwdWrapper_portrait
-                    : styles.pwdWrapper_landscape
+                  portraitMode || this.state.authMode === 'login'
+                    ? styles.pwdContainer_portrait
+                    : styles.pwdContainer_landscape
                 }
               >
-                <Input style={styles.input} placeholder="Confirm Password" />
+                <View
+                  style={
+                    portraitMode || this.state.authMode === 'login'
+                      ? styles.pwdWrapper_portrait
+                      : styles.pwdWrapper_landscape
+                    }
+                >
+                  <Input
+                    style={styles.input}
+                    value={this.state.formFields.password.value}
+                    onChangeText={value => this.handleFieldChange('password', value)}
+                    placeholder="Password"
+                    valid={this.state.formFields.password.valid}
+                    secureTextEntry
+                  />
+                </View>
+                
+                {this.state.authMode === 'signup' && (
+                  <View
+                    style={
+                      portraitMode
+                        ? styles.pwdWrapper_portrait
+                        : styles.pwdWrapper_landscape
+                    }
+                  >
+                    <Input
+                      style={styles.input}
+                      value={this.state.formFields.confirmPassword.value}
+                      onChangeText={value => this.handleFieldChange('confirmPassword', value)}
+                      placeholder="Confirm Password"
+                      valid={this.state.formFields.confirmPassword.valid}
+                      secureTextEntry
+                    />
+                  </View>
+                )}
               </View>
             </View>
+          </TouchableWithoutFeedback>
 
-          </View>
           <ButtonBG background="#29aaf4" textColor="#fff" onPress={this.onLogin}>Submit</ButtonBG>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
@@ -155,4 +210,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthScreen;
+const mapDispatchToProps = { loginAttempt };
+
+export default connect(null, mapDispatchToProps)(AuthScreen);
