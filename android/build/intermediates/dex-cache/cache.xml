@@ -246,6 +246,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\reactnativeapp\react-native-image-picker\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="4bc7e4c88d8a58037f153bc224b47da51ae40f2f">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\reactnativeapp-react-native-image-picker-unspecified_08859a5d2e70d4101d49d3fd2536c85b0229abe7.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\vadzim.pastanoukin\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
         jumboMode="false"
         optimize="true"
