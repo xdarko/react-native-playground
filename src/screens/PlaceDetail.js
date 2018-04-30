@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { removePlace } from '../store/actions';
@@ -20,21 +21,36 @@ class PlaceDetailScreen extends Component {
   render() {
     const { place } = this.props;
 
+    const mapRegion = {
+      latitude: place.location.latitude,
+      longitude: place.location.longitude,
+      latitudeDelta: 0.0122,
+      longitudeDelta: Dimensions.get('window').width / Dimensions.get('window').height * 0.0122
+    };
+
     return (
-      <View style={styles.container}>
-        <View>
-          <Image source={place.image} style={styles.image} />
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image source={place.image} style={styles.image} />
+          </View>
+          <View style={styles.mapContainer}>
+            <MapView initialRegion={mapRegion} style={styles.map}>
+              <MapView.Marker coordinate={mapRegion} />
+            </MapView>
+          </View>
+
           <Text style={styles.text}>{place.text}</Text>
+          
+          <View>
+            <TouchableOpacity onPress={this.handleRemovePlace}>
+              <View style={styles.deleteButton}>
+                <Icon name="ios-trash" size={30} color="red" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        
-        <View>
-          <TouchableOpacity onPress={this.handleRemovePlace}>
-            <View style={styles.deleteButton}>
-              <Icon name="ios-trash" size={30} color="red" />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -43,9 +59,19 @@ const styles = StyleSheet.create({
   container: {
     margin: 22
   },
+  imageContainer: {
+    marginBottom: 20
+  },
   image: {
     width: '100%',
     height: 200
+  },
+  mapContainer: {
+    marginBottom: 20
+  },
+  map: {
+    width: '100%',
+    height: 240,
   },
   text: {
     fontWeight: 'bold',

@@ -12,6 +12,7 @@ const placesReducer = (state = initialState, action) => {
         places: state.places.concat({
           id: Math.random().toString(),
           text: action.placeText,
+          location: action.placeLocation,
           image: {
             uri: 'https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&h=350'
           }

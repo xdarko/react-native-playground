@@ -1,8 +1,9 @@
 import { ADD_PLACE, REMOVE_PLACE } from './types';
 
-export const addPlace = placeText => ({
+export const addPlace = (placeText, placeLocation) => ({
   type: ADD_PLACE,
-  placeText
+  placeText,
+  placeLocation
 });
 
 export const removePlace = placeId => ({

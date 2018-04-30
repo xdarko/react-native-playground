@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, FlatList } from 'react-native';
 import PlaceListItem from './PlaceListItem';
 
@@ -12,6 +13,11 @@ const PlaceList = ({ places, onPlaceSelect }) => (
     )}
   />
 );
+
+PlaceList.propTypes = {
+  places: PropTypes.array,
+  onPlaceSelect: PropTypes.func
+};
 
 const styles = StyleSheet.create({
   listContainer: {

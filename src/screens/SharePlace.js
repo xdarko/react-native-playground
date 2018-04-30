@@ -20,8 +20,9 @@ class SharePlaceScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
-  state={
-    placeInput: ''
+  state = {
+    placeInput: '',
+    location: null,
   };
 
   onNavigatorEvent = e => {
@@ -32,9 +33,18 @@ class SharePlaceScreen extends Component {
 
   handlePlaceInputChange = placeInput => this.setState({ placeInput });
 
+  handleLocationPick = location => {
+    this.setState({ location });
+
+  };
+
   handlePlaceAdd = () => {
-    const { placeInput } = this.state;
-    if (placeInput.trim()) this.props.addPlace(placeInput);
+    const { placeInput, location } = this.state;
+    if (placeInput.trim() && location) {
+      this.props.addPlace(placeInput, location);
+    } else {
+      alert('Please select a place name and location!');
+    }
   };
 
   render() {
@@ -46,7 +56,7 @@ class SharePlaceScreen extends Component {
           </TextMain>
           
           <PickImage />
-          <PickLocation />
+          <PickLocation onLocationPick={this.handleLocationPick} />
           <PlaceInput value={this.state.placeInput} onChange={this.handlePlaceInputChange} />
 
           <View style={styles.buttonContainer}>

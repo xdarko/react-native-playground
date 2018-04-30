@@ -39,6 +39,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\10.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-10.0.1_95b04b973d58ab662382876f7f6953fabb5cc82b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\vadzim.pastanoukin\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
         jumboMode="false"
         optimize="true"
@@ -111,6 +120,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-10.0.1_9a1d34600c471b4730a94b7cc74516591ce91292.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\vadzim.pastanoukin\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
         jumboMode="false"
         optimize="true"
@@ -171,6 +189,15 @@
         revision="25.0.1"
         sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
         <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.3.1_1242c781274d19ed6a66cdabe1d0cc83b2f1657e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-10.0.1_ab3ded3a77d7a89afcbcfe899ab45322887f19ca.jar" />
     </item>
     <item
         is-multidex="false"
@@ -381,6 +408,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-10.0.1_bdc2981c3571bd78c694aa6c03dd94b81a5f5594.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\vadzim.pastanoukin\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
         jumboMode="false"
         optimize="true"
@@ -396,6 +432,15 @@
         revision="25.0.1"
         sha1="8f615bca00639150c9eb6175d4b5471193f70794">
         <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_9eb1b15cebf5362046b0951313683f461771154c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Projects\react-native-app\android\app\build\intermediates\exploded-aar\reactnativeapp\react-native-maps\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1cecb4d2f0030c6a3b51b3f53da8187e790051b4">
+        <dex dex="D:\Projects\react-native-app\android\app\build\intermediates\pre-dexed\debug\reactnativeapp-react-native-maps-unspecified_5269958b3eb6d391b515dcbe668c2b1febad94b1.jar" />
     </item>
     <item
         is-multidex="false"
