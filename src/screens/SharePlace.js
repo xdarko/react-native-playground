@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { addPlace } from '../store/actions';
 import { TextMain, TextHeader } from '../components/ui';
@@ -60,7 +60,11 @@ class SharePlaceScreen extends Component {
           <PlaceInput value={this.state.placeInput} onChange={this.handlePlaceInputChange} />
 
           <View style={styles.buttonContainer}>
-            <Button title="Share the Place!" onPress={this.handlePlaceAdd} />
+            {this.props.isPlaceUploading ? (
+              <ActivityIndicator />
+            ) : (
+              <Button title="Share the Place!" onPress={this.handlePlaceAdd} />
+            )}
           </View>
         </View>
       </ScrollView>
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = ({ ui: { isPlaceUploading } }) => ({ isPlaceUploading });
 const mapDispatchToProps = { addPlace };
 
-export default connect(null, mapDispatchToProps)(SharePlaceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SharePlaceScreen);

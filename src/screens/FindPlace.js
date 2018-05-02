@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 import { connect } from 'react-redux';
+import { getPlaces } from '../store/actions';
 import PlaceList from '../components/PlaceList';
 
 class FindPlaceScreen extends Component {
+  static propTypes = {
+    places: PropTypes.array.isRequired,
+    getPlaces: PropTypes.func.isRequired
+  };
+
   static navigatorStyle = {
     navBarButtonColor: 'orange'
   };
@@ -11,6 +18,10 @@ class FindPlaceScreen extends Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  componentDidMount() {
+    this.props.getPlaces();
   }
 
   state = {
@@ -113,6 +124,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateTpProps = ({ places: { places } }) => ({ places });
+const mapStateToProps = ({ places: { places } }) => ({ places });
+const mapDispatchToProps = { getPlaces };
 
-export default connect(mapStateTpProps)(FindPlaceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
