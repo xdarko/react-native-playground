@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   StyleSheet,
@@ -9,15 +10,19 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { connect } from 'react-redux';
-import { loginAttempt } from '../store/actions';
+import { authAttempt, autoSignIn } from '../store/actions';
 import { Input, TextMain, TextHeader, ButtonBG } from '../components/ui';
-import startMainTabs from './main-tabs/startMainTabs';
 import validateFormField from '../utils/validation';
 import backgroundImage from '../assets/background.jpg';
 
 class AuthScreen extends Component {
+  static propTypes = {
+    authAttempt: PropTypes.func.isRequired,
+    autoSignIn: PropTypes.func.isRequired
+  };
+
   state = {
-    authMode: 'signup',
+    authMode: 'login',
     portraitMode: true, // whether device has a portrait screen orientation
     formFields: {
       email: {
@@ -48,16 +53,19 @@ class AuthScreen extends Component {
     Dimensions.addEventListener('change', this.checkScreenOrientation);
   }
 
+  componentDidMount() {
+    this.props.autoSignIn();
+  }
+
   componentWillUnmount() {
     Dimensions.removeEventListener('change', this.checkScreenOrientation);
   }
 
-  onLogin = () => {
-    this.props.loginAttempt({
+  onAuthAttempt = () => {
+    this.props.authAttempt(this.state.authMode, {
       email: this.state.formFields.email.value,
       password: this.state.formFields.password.value
     });
-    startMainTabs();
   };
 
   checkScreenOrientation = dimensions => {
@@ -172,7 +180,9 @@ class AuthScreen extends Component {
             </View>
           </TouchableWithoutFeedback>
 
-          <ButtonBG background="#29aaf4" textColor="#fff" onPress={this.onLogin}>Submit</ButtonBG>
+          <ButtonBG background="#29aaf4" textColor="#fff" onPress={this.onAuthAttempt}>
+            Submit
+          </ButtonBG>
         </KeyboardAvoidingView>
       </ImageBackground>
     );
@@ -210,6 +220,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = { loginAttempt };
+const mapDispatchToProps = { authAttempt, autoSignIn };
 
 export default connect(null, mapDispatchToProps)(AuthScreen);

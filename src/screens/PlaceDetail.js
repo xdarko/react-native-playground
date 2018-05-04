@@ -4,17 +4,17 @@ import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Dimensions
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
-import { removePlace } from '../store/actions';
+import { deletePlace } from '../store/actions';
 
 class PlaceDetailScreen extends Component {
   static propTypes = {
     place: PropTypes.object.isRequired,
-    onRemovePlace: PropTypes.func.isRequired
+    onDeletePlace: PropTypes.func.isRequired
   };
 
   handleRemovePlace = () => {
-    const { place, onRemovePlace, navigator } = this.props;
-    onRemovePlace(place.id);
+    const { place, onDeletePlace, navigator } = this.props;
+    onDeletePlace(place.id);
     navigator.pop();
   };
 
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = { onRemovePlace: removePlace };
+const mapDispatchToProps = { onDeletePlace: deletePlace };
 
 export default connect(null, mapDispatchToProps)(PlaceDetailScreen);

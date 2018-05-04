@@ -1,3 +1,3 @@
-export { addPlace, removePlace, getPlaces } from './places';
-export { loginAttempt } from './auth';
+export { addPlace, deletePlace, getPlaces } from './places';
+export { authAttempt, getToken, autoSignIn } from './auth';
 export { uiStartPlaceUpload, uiStopPlaceUpload } from './ui';

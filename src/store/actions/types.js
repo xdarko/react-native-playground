@@ -1,6 +1,7 @@
 // export const ADD_PLACE = 'ADD_PLACE';
-// export const REMOVE_PLACE = 'REMOVE_PLACE';
-export const SET_PLACES = 'SET_PLACES'
-export const LOGIN_ATTEMPT = 'LOGIN_ATTEMPT';
+export const REMOVE_PLACE = 'REMOVE_PLACE';
+export const SET_PLACES = 'SET_PLACES';
+export const AUTH_ATTEMPT = 'AUTH_ATTEMPT';
+export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
 export const UI_START_PLACE_UPLOAD = 'UI_START_PLACE_UPLOAD';
 export const UI_STOP_PLACE_UPLOAD = 'UI_STOP_PLACE_UPLOAD';
